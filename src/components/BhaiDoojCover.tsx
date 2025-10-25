@@ -1,5 +1,5 @@
 import { motion, Variants } from "framer-motion";
-import coverImg from "../images/intro.gif";
+import { useEffect } from "react";
 
 type Props = {
   name?: string;
@@ -7,6 +7,23 @@ type Props = {
 };
 
 export default function BhaiDoojCover({ name = "SIS", onNext }: Props) {
+  useEffect(() => {
+    const src = "https://tenor.com/embed.js";
+    // Create a fresh script tag so Tenor registers the embed for this mount.
+    const s = document.createElement("script");
+    s.src = src;
+    s.async = true;
+    document.body.appendChild(s);
+
+    return () => {
+      // Clean up the appended script when component unmounts to avoid duplicates
+      try {
+        document.body.removeChild(s);
+      } catch (e) {
+        /* ignore */
+      }
+    };
+  }, []);
   const fadeUp: Variants = {
     hidden: { opacity: 0, y: 25 },
     // `visible` is a function so it can read the `custom` prop passed to motion components
@@ -134,7 +151,7 @@ Didi, though we come from different mothers, your boundless love has made us fam
           ✦ ✦ ✦
         </motion.div>
 
-        {/* Illustration */}
+        {/* Illustration (Tenor embed) */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -142,11 +159,20 @@ Didi, though we come from different mothers, your boundless love has made us fam
           custom={1.2}
           className="w-[55%] sm:w-[32%] max-w-[200px] mt-1"
         >
-          <img
-            src={coverImg}
-            alt="Brother and sister illustration"
-            className="w-full h-auto object-contain rounded-xl shadow-lg border border-[#FDE2E4]/60"
-          />
+          {/* Tenor GIF embed markup. We load the Tenor embed script via useEffect below. */}
+          <div
+            className="tenor-gif-embed w-full h-auto rounded-xl shadow-lg border border-[#FDE2E4]/60 overflow-hidden"
+            data-postid="14481817446991535187"
+            data-share-method="host"
+            data-aspect-ratio="1"
+            data-width="100%"
+          >
+            <a href="https://tenor.com/view/me-my-sis-gk-sis-my-sis-fun-gif-14481817446991535187">
+              Me My Sis Gk Sis GIF
+            </a>
+            from
+            <a href="https://tenor.com/search/me+my+sis-gifs">Me My Sis GIFs</a>
+          </div>
         </motion.div>
       </div>
 

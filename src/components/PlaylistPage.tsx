@@ -159,14 +159,8 @@ export default function PlaylistPage({ onBack, onNext }: Props) {
               <img
                 src={currentSong.cover}
                 alt={currentSong.title}
-                className="w-full h-full object-contain rounded-2xl bg-[#FFF9FB]"
-                style={{
-                  padding: '4px',
-                  margin: 'auto',
-                  maxHeight: '100%',
-                  maxWidth: '100%',
-                  objectPosition: 'center'
-                }}
+                className="w-full h-full object-cover rounded-2xl bg-[#FFF9FB]"
+                style={{ objectPosition: "center" }}
                 draggable={false}
               />
             </motion.div>
